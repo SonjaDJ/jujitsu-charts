@@ -5,8 +5,11 @@ from random import randint
 
 def displayLines(inArray):
     xind=1
-    for x in inArray:
-        print xind, x.strip()
+    for x in inArray: #looks like blah,    bla,   blah,       blah
+        print xind,
+        for y in x.split(","):
+            print y.strip(),
+        print ""
         xind+=1
 
 def listcharts():
@@ -30,10 +33,11 @@ def getCharts():
 pickQ=True
 while(1):
     if pickQ:
+        print ""
         print "Available Charts:\n"
         listcharts() 
         myCharts=getCharts()
-        print "\n"
+        print ""
         try:
             fname=raw_input("Please pick a chart from available cvs files: ")
             #if ".csv" in fname:
@@ -45,13 +49,16 @@ while(1):
                     farr=open(c).readlines()
                     chartLen=len(farr)
                     chartPicked=os.path.basename(c)
-            pickQ=False    
+                    pickQ=False    
         except:
             print "Error, chart not available"
             pickQ=True
     else:
-        print chartPicked,chartLen
+        print ""
+        print chartPicked
+        print ""
         displayLines(farr)
+        print ""
         num=raw_input("Next number? (r for random, q to quit, c to change chart): ")
         if num=="q":
             break
@@ -66,4 +73,4 @@ while(1):
                 os.system('say '+replaceWords(readme).lower())
         except:
             print "Didn't understand... try again...",sys.exc_info()[0]
-    print "-----"
+    print ""

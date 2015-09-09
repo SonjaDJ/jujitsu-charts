@@ -33,12 +33,12 @@ def replaceWords(astr):
     tempStr=re.sub("HISHIGI","HE-SHE Ghe",tempStr)    
     tempStr=re.sub("JIME","GEE-ME",tempStr)    
     tempStr=re.sub("KATA","CAH-TAH",tempStr)    
-    tempStr=re.sub("MOROTE","MORE OH-TAY",tempStr)    
-    tempStr=re.sub("SAKE","SAH-KEY",tempStr)    
-    tempStr=re.sub("NAGE","NAH-GAY",tempStr)    
+    tempStr=re.sub("MOROTE","MORE OH TE",tempStr)    
+    tempStr=re.sub("SAKE","SAH KEY",tempStr)    
+    tempStr=re.sub("NAGE","NAH GAY",tempStr)    
     tempStr=re.sub("BOW","BOUGH",tempStr)    
     tempStr=re.sub("TOMOE","TOE-MOE Ay",tempStr)    
     tempStr=re.sub("GURUMA","GUR-OOH MA",tempStr)    
     retstr=re.sub("GERI","GARY",tempStr)    
-    #print retstr
+    print retstr
     return retstr
