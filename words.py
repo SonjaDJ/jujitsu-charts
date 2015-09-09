@@ -1,11 +1,13 @@
 import re
 
+#careful... flex bow-->flex bough, but not elbow-->elbough, changed to " bow"-->" bough"
 def replaceWords(astr):
     """
     Replace the romanized japanese with phoenetic english that 'say' can pronounce
     """
     tempStr=astr.upper()
-    tempStr=re.sub("SUTEMI","SUIT-EMMY",tempStr)    
+    tempStr=re.sub("HITTSUI","HIT SOO E",tempStr)    
+    tempStr=re.sub("SUTEMI","SUIT EMMY",tempStr)    
     tempStr=re.sub("TORI","Tore-E",tempStr)    
     tempStr=re.sub("UDE","OOH-Day",tempStr)    
     tempStr=re.sub("HAITTO","High-toe",tempStr)    
@@ -36,7 +38,7 @@ def replaceWords(astr):
     tempStr=re.sub("MOROTE","MORE OH TE",tempStr)    
     tempStr=re.sub("SAKE","SAH KEY",tempStr)    
     tempStr=re.sub("NAGE","NAH GAY",tempStr)    
-    tempStr=re.sub("BOW","BOUGH",tempStr)    
+    tempStr=re.sub(" BOW"," BOUGH",tempStr)    
     tempStr=re.sub("TOMOE","TOE-MOE Ay",tempStr)    
     tempStr=re.sub("GURUMA","GUR-OOH MA",tempStr)    
     retstr=re.sub("GERI","GARY",tempStr)    
