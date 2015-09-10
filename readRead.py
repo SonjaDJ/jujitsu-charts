@@ -1,4 +1,5 @@
 import os
+import types
 import sys
 from words import replaceWords
 from random import randint
@@ -6,17 +7,19 @@ from random import randint
 def displayLines(inArray):
     xind=1
     for x in inArray: #looks like blah,    bla,   blah,       blah
-        print xind,
+        print str(xind)+". ",
         for y in x.split(","):
             print y.strip(),
         print ""
         xind+=1
 
 def listcharts():
+    chartI=1
     for r,ds,fs in os.walk("."):
         for filename in fs:
             if ".csv" in filename:
-                print "\t"+filename
+                print str(chartI)+".","\t"+filename
+                chartI+=1
 
 def getCharts():
     charts=[]
@@ -38,21 +41,30 @@ while(1):
         listcharts() 
         myCharts=getCharts()
         print ""
+        fname=raw_input("Please pick a chart from available cvs files (or q to quit): ")
         try:
-            fname=raw_input("Please pick a chart from available cvs files: ")
-            #if ".csv" in fname:
-            #    farr=open(fname).readlines()
-            #else:
-            #    farr=open(fname+".csv").readlines()
-            for c in myCharts:
-                if fname in c:
-                    farr=open(c).readlines()
-                    chartLen=len(farr)
-                    chartPicked=os.path.basename(c)
-                    pickQ=False    
-        except:
-            print "Error, chart not available"
-            pickQ=True
+            #integer label was entered
+            intfname=int(fname)
+            if intfname <= len(myCharts):
+                farr=open(myCharts[intfname-1]).readlines()
+                chartLen=len(farr)
+                chartPicked=os.path.basename(myCharts[intfname-1])
+                pickQ=False    
+            else:
+                print "Chart number "+intfname+" not available..."
+                print ""
+        except ValueError:
+            #user entered a string (that doesn't look like an integer)
+            if fname=="q":
+                print "HERE Q"
+                sys.exit()
+            else:
+                for c in myCharts:
+                    if fname in c:
+                        farr=open(c).readlines()
+                        chartLen=len(farr)
+                        chartPicked=os.path.basename(c)
+                        pickQ=False    
     else:
         print ""
         print chartPicked
