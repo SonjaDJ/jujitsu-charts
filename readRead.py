@@ -1,8 +1,24 @@
 import os
 import types
 import sys
-from words import replaceWords
-from random import randint
+from words import replaceWords,replaceWordsKyoko
+#from random import randint,choice
+from random import choice
+from time import sleep
+
+pauseTime=1 #time to wait after choice before sayign the technique
+#pauseTime=0 #time to wait after choice before sayign the technique
+
+#rate=100 #pretty slow
+rate=175 #the default rate for say, for most speakers
+#rate=300 #pretty fast
+
+#voice="Kyoko" # a japanese lady #If you use Kyoko switch to replaceWordsKyoko
+voice="Alex" # the default
+#voice="Vicki" # 
+#voice="Victoria" #
+#voice="Bruce" # 
+#voice="Ralph" # 
 
 def displayLines(inArray):
     xind=1
@@ -49,6 +65,7 @@ while(1):
                 farr=open(myCharts[intfname-1]).readlines()
                 chartLen=len(farr)
                 chartPicked=os.path.basename(myCharts[intfname-1])
+                newRange=range(chartLen) #For selecting random path through chart
                 pickQ=False    
             else:
                 print "Chart number "+intfname+" not available..."
@@ -56,7 +73,6 @@ while(1):
         except ValueError:
             #user entered a string (that doesn't look like an integer)
             if fname=="q":
-                print "HERE Q"
                 sys.exit()
             else:
                 for c in myCharts:
@@ -64,6 +80,7 @@ while(1):
                         farr=open(c).readlines()
                         chartLen=len(farr)
                         chartPicked=os.path.basename(c)
+                        newRange=range(chartLen) #For selecting random path through chart
                         pickQ=False    
     else:
         print ""
@@ -77,12 +94,19 @@ while(1):
         elif num=="c":
             pickQ=True
         elif num=="r":
-            num=randint(1,chartLen)  
+            ##This if want rand, but I think I'd prefer random path through each once
+            #num=randint(1,chartLen)  
+            num=choice(newRange)+1 #newRange is set when the chart is first chosen
+            newRange.remove(num-1) #get rid of this one from the random choices so hit each one once
         try:
             numIn=int(num)-1
-            if numIn>-1 and numIn<len(farr):
+            print str(num)+". ",
+            if numIn>-1 and numIn<len(farr): #don't need this anymore
                 readme=farr[numIn]
-                os.system('say '+replaceWords(readme).lower())
+                print readme
+                sleep(pauseTime) #a little time to get ready after pressing the key
+                os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWords(readme).lower())
+                #os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWordsKyoko(readme).lower())
         except:
             print "Didn't understand... try again...",sys.exc_info()[0]
     print ""

@@ -27,20 +27,29 @@ def replaceWords(astr):
     tempStr=re.sub("\)","",tempStr)    
     tempStr=re.sub("GARI","GAR E",tempStr)    
     tempStr=re.sub("FUMI","FOOM E",tempStr)    
-    tempStr=re.sub("KOMI","COMB-E",tempStr)    
-    tempStr=re.sub("USHIRO","OOH-SHE ROW",tempStr)    
-    tempStr=re.sub("GATAME","GAH-Tommy",tempStr)    
-    tempStr=re.sub("HADAKA","HAH-Dacka",tempStr)    
-    tempStr=re.sub("ASHI","AH-SHE",tempStr)    
-    tempStr=re.sub("HISHIGI","HE-SHE Ghe",tempStr)    
-    tempStr=re.sub("JIME","GEE-ME",tempStr)    
-    tempStr=re.sub("KATA","CAH-TAH",tempStr)    
+    tempStr=re.sub("KOMI","COMB E",tempStr)    
+    tempStr=re.sub("USHIRO","OOH SHE ROW",tempStr)    
+    tempStr=re.sub("GATAME","GAH Tommy",tempStr)    
+    tempStr=re.sub("HADAKA","HAH Dacka",tempStr)    
+    tempStr=re.sub("ASHI","AH SHE",tempStr)    
+    tempStr=re.sub("HISHIGI","HE SHE Ghe",tempStr)    
+    tempStr=re.sub("JIME","GEE ME",tempStr)    
+    tempStr=re.sub("KATA","CAH TAH",tempStr)    
     tempStr=re.sub("MOROTE","MORE OH TE",tempStr)    
     tempStr=re.sub("SAKE","SAH KEY",tempStr)    
     tempStr=re.sub("NAGE","NAH GAY",tempStr)    
+    tempStr=re.sub("KAGE","CAH GAY",tempStr)    
     tempStr=re.sub(" BOW"," BOUGH",tempStr)    
-    tempStr=re.sub("TOMOE","TOE-MOE Ay",tempStr)    
-    tempStr=re.sub("GURUMA","GUR-OOH MA",tempStr)    
+    tempStr=re.sub("TOMOE","TOE MOE Ay",tempStr)    
+    tempStr=re.sub("GURUMA","GUR OOH MA",tempStr)    
     retstr=re.sub("GERI","GARY",tempStr)    
-    print retstr
+    print "DEBUG INFO: "+retstr
+    return retstr
+
+def replaceWordsKyoko(astr):
+    """
+    Don't replace anything for Kyoko
+    """
+    tempStr=astr.upper()
+    retstr=tempStr
     return retstr
