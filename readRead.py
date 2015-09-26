@@ -6,8 +6,8 @@ from words import replaceWords,replaceWordsKyoko
 from random import choice
 from time import sleep
 
+#pauseTime=1 #time to wait after choice before sayign the technique
 pauseTime=1 #time to wait after choice before sayign the technique
-#pauseTime=0 #time to wait after choice before sayign the technique
 
 #rate=100 #pretty slow
 rate=175 #the default rate for say, for most speakers
@@ -97,13 +97,19 @@ while(1):
             ##This if want rand, but I think I'd prefer random path through each once
             #num=randint(1,chartLen)  
             num=choice(newRange)+1 #newRange is set when the chart is first chosen
-            newRange.remove(num-1) #get rid of this one from the random choices so hit each one once
+            if len(newRange)>1:
+                newRange.remove(num-1) #get rid of this one from the random choices so hit each one once
+            else:
+                pickQ=True
+            print "Remaining: ",map(lambda x: x+1,newRange)
         try:
             numIn=int(num)-1
+            print ""
             print str(num)+". ",
             if numIn>-1 and numIn<len(farr): #don't need this anymore
                 readme=farr[numIn]
                 print readme
+                
                 sleep(pauseTime) #a little time to get ready after pressing the key
                 os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWords(readme).lower())
                 #os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWordsKyoko(readme).lower())

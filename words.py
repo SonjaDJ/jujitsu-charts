@@ -39,11 +39,12 @@ def replaceWords(astr):
     tempStr=re.sub("SAKE","SAH KEY",tempStr)    
     tempStr=re.sub("NAGE","NAH GAY",tempStr)    
     tempStr=re.sub("KAGE","CAH GAY",tempStr)    
+    tempStr=re.sub("AGE","AH GAY",tempStr)    
     tempStr=re.sub(" BOW"," BOUGH",tempStr)    
     tempStr=re.sub("TOMOE","TOE MOE Ay",tempStr)    
     tempStr=re.sub("GURUMA","GUR OOH MA",tempStr)    
     retstr=re.sub("GERI","GARY",tempStr)    
-    print "DEBUG INFO: "+retstr
+    #print "DEBUG INFO: "+retstr
     return retstr
 
 def replaceWordsKyoko(astr):
