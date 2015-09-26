@@ -1,7 +1,7 @@
 import os
 import types
 import sys
-from words import replaceWords,replaceWordsKyoko
+from words import multiple_replace,myWords
 #from random import randint,choice
 from random import choice
 from time import sleep
@@ -13,7 +13,6 @@ pauseTime=1 #time to wait after choice before sayign the technique
 rate=175 #the default rate for say, for most speakers
 #rate=300 #pretty fast
 
-#voice="Kyoko" # a japanese lady #If you use Kyoko switch to replaceWordsKyoko
 voice="Alex" # the default
 #voice="Vicki" # 
 #voice="Victoria" #
@@ -111,8 +110,8 @@ while(1):
                 print readme
                 
                 sleep(pauseTime) #a little time to get ready after pressing the key
-                os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWords(readme).lower())
-                #os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWordsKyoko(readme).lower())
+                #os.system('say -r '+str(rate)+' -v'+str(voice)+' '+replaceWords(readme).lower())
+                os.system('say -r '+str(rate)+' -v'+str(voice)+' '+multiple_replace(myWords,readme).lower())
         except:
             print "Didn't understand... try again...",sys.exc_info()[0]
     print ""
