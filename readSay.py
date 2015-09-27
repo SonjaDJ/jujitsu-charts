@@ -5,6 +5,7 @@ from words import multiple_replace,myWords
 #from random import randint,choice
 from random import choice
 from time import sleep
+from subprocess import call
 
 #pauseTime=1 #time to wait after choice before sayign the technique
 pauseTime=1 #time to wait after choice before sayign the technique
@@ -18,6 +19,26 @@ voice="Alex" # the default
 #voice="Victoria" #
 #voice="Bruce" # 
 #voice="Ralph" # 
+
+major,minor=sys.version_info[0:2]
+
+#warn if not python2.7
+if (major,minor) != (2,7):
+    print "---------------------------"
+    print "WARNING---WARNING---WARNING"
+    print "This code is written for python 2.7..."
+    print "Whereas, you are using python {0}.{1}...".format(major,minor)
+    print "So, you may have some issues..."
+    print "WARNING---WARNING---WARNING"
+    print "---------------------------"
+
+try:
+    call(["say"])
+except OSError:
+    print "It appears that you do not have the program \"say\" installed"
+    print "This code relies on \"say\" to function, therefore we will quit now..."
+    sys.exit()
+
 
 def displayLines(inArray):
     xind=1
