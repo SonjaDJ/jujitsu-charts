@@ -6,6 +6,7 @@ from words import multiple_replace,myWords
 from random import choice
 from time import sleep
 import pyttsx
+import io #ugh, need io.open because otherwise get binary garbage from utf-8 files
 
 #pauseTime=1 #time to wait after choice before sayign the technique
 pauseTime=1 #time to wait after choice before sayign the technique
@@ -41,20 +42,31 @@ def displayLines(inArray):
         print ""
         xind+=1
 
+#charts from getcharts
 def listcharts():
     chartI=1
-    for r,ds,fs in os.walk("."):
-        for filename in fs:
-            if ".csv" in filename:
-                print str(chartI)+".","\t"+filename
-                chartI+=1
+    chartsArray=getCharts()
+    #for r,ds,fs in os.walk("."):
+    #    for filename in fs:
+    #        if ".csv" in filename:
+    #            chartsArray.append(filename)
+    #            #print str(chartI)+".","\t"+filename
+    #            #chartI+=1
+    #chartsArray.sort()
+    for c in chartsArray:
+        print str(chartI)+".","\t"+os.path.basename(c)
+        chartI+=1
+
+
 
 def getCharts():
     charts=[]
     for r,ds,fs in os.walk("."):
         for filename in fs:
             if ".csv" in filename:
-                charts.append("/".join([r,filename]))
+                #charts.append("/".join([r,filename]))
+                charts.append(os.path.join(r,filename))
+    charts.sort()
     return charts
 
 
@@ -74,22 +86,26 @@ while(1):
             #integer label was entered
             intfname=int(fname)
             if intfname <= len(myCharts):
-                farr=open(myCharts[intfname-1]).readlines()
+                farr=io.open(myCharts[intfname-1],encoding="utf-8").readlines()
+                #print "HERE3",farr
                 chartLen=len(farr)
                 chartPicked=os.path.basename(myCharts[intfname-1])
+                #print "HERE4",chartPicked
                 newRange=range(chartLen) #For selecting random path through chart
                 pickQ=False    
             else:
                 print "Chart number "+intfname+" not available..."
                 print ""
         except ValueError:
+            #print "HERE1"
             #user entered a string (that doesn't look like an integer)
             if fname=="q":
                 sys.exit()
             else:
                 for c in myCharts:
                     if fname in c:
-                        farr=open(c).readlines()
+                        farr=io.open(c,encoding="utf-8").readlines()
+                        #print "HERE2",farr
                         chartLen=len(farr)
                         chartPicked=os.path.basename(c)
                         newRange=range(chartLen) #For selecting random path through chart
@@ -114,25 +130,26 @@ while(1):
             else:
                 pickQ=True
             print "Remaining: ",map(lambda x: x+1,newRange)
-        readme=""
-        try:
-            numIn=int(num)-1
-            print ""
-            print str(num)+". ",
-            if numIn>-1 and numIn<len(farr): #don't need this anymore
-                readme=farr[numIn]
-        except:
-            print "Didn't understand... try again...",sys.exc_info()[0]
-        print readme
-        sleep(pauseTime) #a little time to get ready after pressing the key
-        sayString=multiple_replace(myWords,readme).lower()
-        #print sayString
-        #UGH, why do I need a new one every time...
-        #if I don't do this it will only say the first one and then dies on the other lines 
-        #(onyl says first bit)
-        del en
-        en=pyttsx.init()
-        en.setProperty("rate",voiceRate)
-        en.say(sayString)
-        en.runAndWait()
+        if num>-1 or num.isdigit(): #the num>-1 is there first because if user hit "r" num is an int, but if not num is a string... this is bad... 
+            readme=""
+            try:
+                numIn=int(num)-1
+                print ""
+                print str(num)+". ",
+                if numIn>-1 and numIn<len(farr): #don't need this anymore
+                    readme=farr[numIn]
+            except:
+                print "Didn't understand... try again...",sys.exc_info()[0]
+            print readme
+            sleep(pauseTime) #a little time to get ready after pressing the key
+            sayString=multiple_replace(myWords,readme).lower()
+                #print sayString
+                #UGH, why do I need a new one every time...
+                #if I don't do this it will only say the first one and then dies on the other lines 
+                #(onyl says first bit)
+            del en
+            en=pyttsx.init()
+            en.setProperty("rate",voiceRate)
+            en.say(sayString)
+            en.runAndWait()
     print ""
