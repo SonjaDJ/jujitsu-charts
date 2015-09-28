@@ -130,7 +130,8 @@ while(1):
             else:
                 pickQ=True
             print "Remaining: ",map(lambda x: x+1,newRange)
-        if num>-1 or num.isdigit(): #the num>-1 is there first because if user hit "r" num is an int, but if not num is a string... this is bad... 
+        if (num>-1 or num.isdigit()) and (num!="c"): #the num>-1 is there first because if user hit "r" num is an int, but if not num is a string... this is bad... 
+        #if num>-1 or num.isdigit(): #the num>-1 is there first because if user hit "r" num is an int, but if not num is a string... this is bad... 
             readme=""
             try:
                 numIn=int(num)-1
