@@ -1,31 +1,31 @@
-RIGHT  LEFT,            SPIN,  SAKOTSU  
-RIGHT  BLOW,           block,  GANMEN  SHUTO  
-FRONT  CHOKE,        parry,  HAITO,  CROSS  SHUTO  
-ATTempted  HEADLOCK,          SAKOTSU  
-CLUB,            juji  uke,  ARMBREAK,  SAKOTSU  
-PISTOL,          parry,  FLEX  THROW  
-BENT  LAPEL,             FLEX  BOW  
-RIGHT  BLOW,         block,  ULNA  PRESS  
-DOUBLE  WRIST,         ULNA  PRESS  
-SIDE  HEADLOCK,          HAIR  HAMMERLOCK  
-FRONT  HEADLOCK,         CHOP,  pivot,  KICK,  CHOP  
-FRONT  HUG  PINned,         WINDMILL, SAKOTSU  
-REAR  HUG  PInned,          DOUBLE  WINDMILL  
-POLICE  HAMMERLOCK,      HIJI,  ARMBREAK,  CHOP  
-RIGHT  BLOW,         block,  HIJI,  CHOP  
-MAT,  CHOKE,     ARM  PARRY  
-MAT,  attempted headlock,    ARM  PARRY  
-MAT,  SIDE  CHOKE,         ARM  THRUST,  ELBOW  HIJI  
-MAT,  SIDE  CHOKE,         LEG OVER  JUJI  GATAME  
-MAT,  RIGHT  LEFT,          HAMMERLOCK  
-MAT,  STRADDLE,          STOMACH  BUMP  
-KNIFE,             parry,   INSIDE  ARMTWIST  
-KNIFE,             parry,    FLEX  THROW  
-two on one  WRIST,         ULNA  PRESS  
-SIDE  HEADLOCK,          HAIR NOSE  THROW  
-FRONT  CHOKE,          WINGLOCK  
-DOUBLE  WRIST,         TEKUBI  TORI  
-KNIFE,             parry,  ARMBREAK,  REAR  HADAKA  JIME  
-RIGHT  LEFT,            FRONT  HADAKA  JIME  
-RIGHT  BLOW,           block,  STRETCH  ARMBAR, TWIST  THROW  
-RIGHT  BLOW,         pivot,  HAIR HAMMERLOCK  
+right left, spin, sakotsu
+right blow, block, ganmen shuto
+front choke, parry, haito, cross shuto
+attempted headlock, sakotsu
+club, juji uke, armbreak, sakotsu
+pistol, parry, flex throw
+bent lapel, flex bow
+right blow, block, ulna press
+double wrist, ulna press
+side headlock, hair hammerlock
+front headlock, chop, pivot, kick, chop
+front hug pinned, windmill, sakotsu
+rear hug pinned, double windmill
+police hammerlock, hiji, armbreak, chop
+right blow, block, hiji, chop
+mat, choke, arm parry
+mat, attempted headlock, arm parry
+mat, side choke, arm thrust, elbow hiji
+mat, side choke, leg over juji gatame
+mat, right left, hammerlock
+mat, straddle, stomach bump
+knife, parry, inside armtwist
+knife, parry, flex throw
+two on one wrist, ulna press
+side headlock, hair nose throw
+front choke, winglock
+double wrist, tekubi tori
+knife, parry, armbreak, rear hadaka jime
+right left, front hadaka jime
+right blow, block, stretch armbar, twist throw
+right blow, pivot, hair hammerlock
