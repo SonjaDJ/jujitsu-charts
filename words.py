@@ -8,6 +8,7 @@ def multiple_replace(di,te):
 
 #dictionary of replacements to use with multiple_replace
 myWords={
+    "HADAKE":"HAH DAH CAH",
     "URAS":"OOH RAHS",
     "HITTSUI":"HIT SOO E",    
     "SUTEMI":"SUIT EMMY",    
