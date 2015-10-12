@@ -12,7 +12,7 @@ pauseTime=1 #time to wait after choice before sayign the technique
 voiceRate=175 #the default rate for say, for most speakers
 #rate=300 #pretty fast
 
-###For use with say version...
+###For use with say version... 
 voice="Alex" # the default
 #voice="Vicki" # 
 #voice="Victoria" #
@@ -22,9 +22,11 @@ voice="Alex" # the default
 def getAvailableCharts():
     """
         charts are in ./charts/ directory and are csv files the name of which is the name of the charts+".csv"
-        input: none
-        output: array of arrays [ [1, blah, /home/charts/blah.csv], [2, other, /home/charts/other.csv, ... ]
-            sorted by second element (chart name) indexed by first element (to avoid indexing from zero)
+
+        input: 
+            none
+        output: 
+            array of tuples [ (1, blah, /home/charts/blah.csv), (2, other, /home/charts/other.csv), ... ] sorted by second element (chart name) indexed by first element (to avoid indexing from zero)
     """
     pathArray=[]
     indexArray=[]
@@ -139,11 +141,17 @@ def main():
                     trackArr=list(copyArr) #restore the entire thing
                 userLineChoice=choice(trackArr)
                 trackArr.remove(userLineChoice)
+                print ""
+                print "Random picked technique number {0}. There are {1} techniques remaining.".format(userLineChoice,len(trackArr))
                 userSelectedLine=True
             else: 
                 try:
                     userLineChoice=int(userRawInput)
                     userSelectedLine=True
+                    if userLineChoice>len(copyArr) or userLineChoice<1:
+                        print ""
+                        print "Technique number out of range. Try again..."
+                        userSelectedLine=False
                 except:
                     print "Hmm... not sure what you mean... Try again..."
 
