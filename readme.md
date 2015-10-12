@@ -32,6 +32,9 @@ Once a chart is chosen a list of techniques on the chart is displayed. The user 
 
 To add your own charts just put a new comma-separated value (csv) file in the charts directory. csv files in the charts directory are recognized as such and displayed.
 
+I put some comment in square brackets in the chart (mostly about differences betwee the current stanford charts and old stanford charts)
+Anything starting with a "[" is treated as a comment and not displayed
+
 There are some reference docs in the charts directory too.
 
 Also, if you are planning on adding a chart, run the processCSV.py script on it to make sure there is no sillyness going on with the chart and put it in a consistant format, like: python processCSV.py badchart.csv >goodchart.csv

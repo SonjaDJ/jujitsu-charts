@@ -166,7 +166,6 @@ def main():
                 #print userLineChoice,trackArr
                 stringToPrint=getStringToRead(chartLineData,userLineChoice)
                 stringToRead=getPhonetic(stringToPrint)
-                print stringToRead
                 print ""
                 print "Now reading technique {0}: {1}".format(userLineChoice,stringToPrint)
                 sleep(pauseTime) #Give a little time for tori to get ready after pressing the key
