@@ -2,8 +2,12 @@
 
 Setup and usage instructions:
 
-    1. Make sure python2.7 is installed and is what you are calling when you call python (2.6 will probably work too) (2.4 will not work)
-    
+    1. Make sure python2.7 is installed 
+    and is what you are calling when you call python 
+    (2.6 will probably work too) 
+    (2.4 will not work)
+    (3.x will not work)
+
     2a. For Mac, make sure that the command line utility "say" is installed 
     and functioning 
     

@@ -15,6 +15,12 @@ def multiple_replace(di,te):
 
 #dictionary of replacements to use with multiple_replace
 myWords={
+    "KUBI":"COO BEE",
+    "SODE":"SO DAY",
+    "TSURIKOMI":"SUREY COMEY",
+    "GOSHI":"GO SHE",
+    "KUCHIKI TAOSHI":"COO CHEEKY TIE OH SHE",
+    "KATA ASHI HISHIGI":"KAH TAH AH SHE HE SHE GHKAH TAH AH SHE HE SHE GHEE",
     "HADAKE":"HAH DAH CAH",
     "URAS":"OOH RAHS",
     "HITTSUI":"HIT SOO E",    
@@ -34,8 +40,8 @@ myWords={
     "SAKOTSU":"SUCK OAT SUE",    
     "UKI":"OOH KEY",    
     "UKE":"OOH KAY",    
-    "\(":"",    
-    "\)":"",    
+    "(":"",    
+    ")":"",    
     "GARI":"GAR E",    
     "FUMI":"FOOM E",    
     "KOMI":"COMB E",    
