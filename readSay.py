@@ -180,7 +180,15 @@ def main():
                     en.runAndWait()
                     del en 
                 else:
-                    print "Sorry, text-to-speech not supported on this operating system: "+sys.platform 
+                    print "Sorry, text-to-speech probably not supported on this operating system: "+sys.platform 
+                    print "But we made it this far so, let's try pyttsx..."
+                    #try using pyttsx
+                    en=pyttsx.init()
+                    en.setProperty("rate",voiceRate)
+                    en.say(stringToRead.lower())
+                    en.runAndWait()
+                    del en 
+                    
                 userSelectedLine=False
         else:
             displayCharts(aCharts)
