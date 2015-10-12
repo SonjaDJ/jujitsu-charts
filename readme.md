@@ -4,10 +4,12 @@ Setup and usage instructions:
 
     1. Make sure python2.7 is installed and is what you are calling when you call python (2.6 will probably work too) (2.4 will not work)
     
-    2a. For Mac, make sure that the command line utility "say" is installed and functioning 
+    2a. For Mac, make sure that the command line utility "say" is installed 
+    and functioning 
     
     2b. For linux, install the pyttsx python module 
-    (On ubuntu, first get pip: sudo apt-get install pip) 
+    (first get pip... on ubuntu this looks somethign like: 
+    sudo apt-get install pip) 
     (And then: pip install pyttsx)
     
     2c. For Windows, um... 
