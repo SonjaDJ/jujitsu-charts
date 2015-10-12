@@ -4,10 +4,15 @@ Setup and usage instructions:
 
     1. Make sure python2.7 is installed and is what you are calling when you call python (2.6 will probably work too) (2.4 will not work)
     
-    2a. For mac make sure that the command line utility "say" is installed and functioning 
+    2a. For Mac, make sure that the command line utility "say" is installed and functioning 
     
-    2b. For linux make sure that python pyttsx is installed 
+    2b. For linux, install the pyttsx python module 
+    (On ubuntu, first get pip: sudo apt-get install pip) 
+    (And then: pip install pyttsx)
     
+    2c. For Windows, um... 
+    Install cygwin and python2.7 and pip and pyttsx, I guess...
+
     3. git clone https://github.com/asorini/jujitsu-charts.git
     
     4. cd jujistu-charts
