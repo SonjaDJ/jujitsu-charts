@@ -1,12 +1,19 @@
 #jujitsu charts
 
 Setup and usage instructions:
+
     1. Make sure python2.7 is installed and is what you are calling when you call python (2.6 will probably work too) (2.4 will not work)
+    
     2a. For mac make sure that the command line utility "say" is installed and functioning 
+    
     2b. For linux make sure that python pyttsx is installed 
+    
     3. git clone https://github.com/asorini/jujitsu-charts.git
+    
     4. cd jujistu-charts
+    
     5. python readSay.py
+
 
 A list of available charts will be displayed on the screen. The user can choose a chart.
 
