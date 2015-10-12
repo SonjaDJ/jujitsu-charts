@@ -161,8 +161,8 @@ def main():
                     #try using pyttsx
                     en=pyttsx.init()
                     en.setProperty("rate",voiceRate)
-                    en.say(sayString)
-                    en.runAndWait(stringToRead.lower())
+                    en.say(stringToRead.lower())
+                    en.runAndWait()
                     del en 
                 else:
                     print "Sorry, text-to-speech not supported on this operating system: "+sys.platform 
