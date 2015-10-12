@@ -3,7 +3,7 @@ import re
 def getPhonetic(aString):
     """
         input: english-y transliterated japanese string
-        output: phonetic version of string for text-to-speach to read
+        output: phonetic version of string for text-to-speech to read
     """
     return multiple_replace(myWords,aString)
 

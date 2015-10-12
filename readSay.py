@@ -110,6 +110,13 @@ def main():
         allow user to then select a technique from the chart by number or at random
         read the technique using text-to-speech capabilites
     """
+    major,minor=sys.version_info[:2]
+    if (major,minor)!=(2,7):
+        print "This code was written for python 2.7..."
+        print "But you are using python {0}.{1}...".format(major,minor)
+        print "Good luck with that."
+        sleep(1)
+    
     aCharts=getAvailableCharts() #array of tuples (chartUserIndex, chartName, chartPath)
 
     displayCharts(aCharts)
