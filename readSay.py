@@ -1,19 +1,15 @@
-import os
-import types
-import sys
-from words import multiple_replace,myWords
-#from random import randint,choice
+import os, sys, io
+from words import getPhonetic
 from random import choice
 from time import sleep
 import pyttsx
-import io #ugh, need io.open because otherwise get binary garbage from utf-8 files
+import types 
 
 #pauseTime=1 #time to wait after choice before sayign the technique
 pauseTime=1 #time to wait after choice before sayign the technique
 
 #rate=100 #pretty slow
 voiceRate=175 #the default rate for say, for most speakers
-#voiceRate=140 #for pyttsx default voice on ubuntu #the default rate for say, for most speakers
 #rate=300 #pretty fast
 
 ###For use with say version...
@@ -23,134 +19,160 @@ voice="Alex" # the default
 #voice="Bruce" # 
 #voice="Ralph" # 
 
-##sometime pyttsx fails to initialize...
-#try:
-#    en=pyttsx.init()
-#except:
-#    print "Could not set up pyttsx speach engine..."
-#    print "Quiting..."
-#    sys.exit()
+def getAvailableCharts():
+    """
+        charts are in ./charts/ directory and are csv files the name of which is the name of the charts+".csv"
+        input: none
+        output: array of arrays [ [1, blah, /home/charts/blah.csv], [2, other, /home/charts/other.csv, ... ]
+            sorted by second element (chart name) indexed by first element (to avoid indexing from zero)
+    """
+    pathArray=[]
+    indexArray=[]
+    chartUserIndex=0
+    for r,ds,fs in os.walk("./charts/"):
+        for f in fs:
+            chartName,fext=os.path.splitext(f) 
+            fullpath=os.path.join(r,f)
+            if fext.lower()=='.csv':
+                chartUserIndex+=1
+                pathArray.append((chartName,fullpath))
+    return map(lambda x: (x[0],x[1][0],x[1][1]),zip(map(lambda x: x+1,xrange(chartUserIndex)),sorted(pathArray)))
+    
 
-
-
-def displayLines(inArray):
-    xind=1
-    for x in inArray: #looks like blah,    bla,   blah,       blah
-        print str(xind)+". ",
-        for y in x.split(","):
-            print y.strip(),
-        print ""
-        xind+=1
-
-#charts from getcharts
-def listcharts():
-    chartI=1
-    chartsArray=getCharts()
-    #for r,ds,fs in os.walk("."):
-    #    for filename in fs:
-    #        if ".csv" in filename:
-    #            chartsArray.append(filename)
-    #            #print str(chartI)+".","\t"+filename
-    #            #chartI+=1
-    #chartsArray.sort()
-    for c in chartsArray:
-        print str(chartI)+".","\t"+os.path.basename(c)
-        chartI+=1
-
-
-
-def getCharts():
-    charts=[]
-    for r,ds,fs in os.walk("."):
-        for filename in fs:
-            if ".csv" in filename:
-                #charts.append("/".join([r,filename]))
-                charts.append(os.path.join(r,filename))
-    charts.sort()
-    return charts
-
-
-#f=open("aiki4.csv")
-#farr=f.readlines()
-#f.close()
-pickQ=True
-while(1):
-    if pickQ:
-        print ""
-        print "Available Charts:\n"
-        listcharts() 
-        myCharts=getCharts()
-        print ""
-        fname=raw_input("Please pick a chart from available cvs files (or q to quit): ")
-        try:
-            #integer label was entered
-            intfname=int(fname)
-            if intfname <= len(myCharts):
-                farr=io.open(myCharts[intfname-1],encoding="utf-8").readlines()
-                #print "HERE3",farr
-                chartLen=len(farr)
-                chartPicked=os.path.basename(myCharts[intfname-1])
-                #print "HERE4",chartPicked
-                newRange=range(chartLen) #For selecting random path through chart
-                pickQ=False    
-            else:
-                print "Chart number "+intfname+" not available..."
-                print ""
-        except ValueError:
-            #print "HERE1"
-            #user entered a string (that doesn't look like an integer)
-            if fname=="q":
-                sys.exit()
-            else:
-                for c in myCharts:
-                    if fname in c:
-                        farr=io.open(c,encoding="utf-8").readlines()
-                        #print "HERE2",farr
-                        chartLen=len(farr)
-                        chartPicked=os.path.basename(c)
-                        newRange=range(chartLen) #For selecting random path through chart
-                        pickQ=False    
-    else:
-        print ""
-        print chartPicked
-        print ""
-        displayLines(farr)
-        print ""
-        num=raw_input("Next number? (r for random, q to quit, c to change chart): ")
-        if num=="q":
-            break
-        elif num=="c":
-            pickQ=True
-        elif num=="r":
-            ##This if want rand, but I think I'd prefer random path through each once
-            #num=randint(1,chartLen)  
-            num=choice(newRange)+1 #newRange is set when the chart is first chosen
-            if len(newRange)>1:
-                newRange.remove(num-1) #get rid of this one from the random choices so hit each one once
-            else:
-                pickQ=True
-            print "Remaining: ",map(lambda x: x+1,newRange)
-        if (num>-1 or num.isdigit()) and (num!="c"): #the num>-1 is there first because if user hit "r" num is an int, but if not num is a string... this is bad... 
-            readme=""
-            try:
-                numIn=int(num)-1
-                print ""
-                print str(num)+". ",
-                if numIn>-1 and numIn<len(farr): #don't need this anymore
-                    readme=farr[numIn]
-            except:
-                print "Didn't understand... try again...",sys.exc_info()[0]
-            print readme
-            sleep(pauseTime) #a little time to get ready after pressing the key
-            sayString=multiple_replace(myWords,readme).lower()
-                #print sayString
-                #UGH, why do I need a new one every time...
-                #if I don't do this it will only say the first one and then dies on the other lines 
-                #(onyl says first bit)
-            os.system('say -r '+str(voiceRate)+' -v'+str(voice)+' '+multiple_replace(myWords,readme).lower())
-            #del en
-            #en=pyttsx.init()
-            #en.setProperty("rate",voiceRate)
-            #en.say(sayString)
-            #en.runAndWait()
+def displayCharts(aC,displayType='Charts'):
+    """
+        Display the available charts (or lines in a chart if displayType='Lines'
+        input: array of tuples of len at least 2.
+    """
     print ""
+    if displayType=='Charts':
+        print "Available charts to choose from: "
+    elif displayType=='Lines':
+        print "Available techniques to choose from: "
+        
+    for el in aC:
+        assert type(el[1])==types.StringType
+        print "\t"+str(el[0])+". "+el[1]
+    print "---------------------------------"
+            
+def selectChart():
+    """
+        return the user's chart selection
+    """
+    chartStr=raw_input("Enter number of chart to display/read: ")
+    print "---------------------------------------"
+    while (True):
+        try:
+            chartIndexInt=int(chartStr)
+            return chartIndexInt
+        except:
+            print "-------------------------------------------"
+            chartStr=raw_input("Try again... Enter a number: ")
+            print "---------------------------------------"
+
+def getChartData(aC,cI):
+    """
+        input: array of charts, index of selected chart
+        output: array of tuples (technique index, technique string) and array of correct length for use with random selection
+    """
+    fpath=[x[2] for x in aC if x[0]==cI][0]
+    retArrTwo=[]
+    with open(fpath,'r') as f:
+        retArrTemp=[x.strip() for x in f.readlines() if x[0]!='[']
+        for el in retArrTemp:
+            commentIndex=el.find('[')
+            if commentIndex==-1:
+                retArrTwo.append(el)
+            else:
+                retArrTwo.append(el[:commentIndex])
+    trackingArray=[x+1 for x in xrange(len(retArrTwo))]
+    return zip(map(lambda x: x+1,xrange(len(retArrTwo))),retArrTwo),trackingArray
+
+def displayLines(cLines):
+    """
+        input: and array of chart lines sep by commas
+        output: none
+    """
+    displayCharts(cLines,displayType='Lines')
+
+def getStringToRead(chartLineData,userLineChoice):
+    for el in chartLineData:
+        if el[0]==userLineChoice:
+            return el[1]
+    return "Line Error"
+            
+def main():
+    """
+        display the charts (.csv files) in the ./charts directory
+        allow user to select a chart by number
+        allow user to then select a technique from the chart by number or at random
+        read the technique using text-to-speech capabilites
+    """
+    aCharts=getAvailableCharts() #array of tuples (chartUserIndex, chartName, chartPath)
+
+    displayCharts(aCharts)
+    chartUIndex=selectChart()
+    chartLineData,trackArr=getChartData(aCharts,chartUIndex)
+    userPickedChart=True
+    copyArr=list(trackArr) #get a copy in case I want to restore
+    
+    while True:
+        if userPickedChart:
+            #display the chart lines and ask user to pick one
+            #or user can choose to have a random one picked (as part of taking random path through chart)
+            #or user can choose to change chart
+            #or user can choose to quit
+            displayLines(chartLineData) 
+            
+            userSelectedLine=False
+            print "Select technique to read by number..."
+            print "Or hit 'r' to read a random technique"
+            print "Or hit 'c' to change to a new chart..."
+            print "Or hit 'q' to quit"
+            userRawInput=raw_input("Enter your selection: ")
+            if userRawInput.lower()=='q':
+                sys.exit()
+            elif userRawInput.lower()=='c': 
+                userPickedChart=False
+            elif userRawInput.lower()=='r': 
+                if len(trackArr)==0:
+                    trackArr=list(copyArr) #restore the entire thing
+                userLineChoice=choice(trackArr)
+                trackArr.remove(userLineChoice)
+                userSelectedLine=True
+            else: 
+                try:
+                    userLineChoice=int(userRawInput)
+                    userSelectedLine=True
+                except:
+                    print "Hmm... not sure what you mean... Try again..."
+
+            if userSelectedLine:
+                #print userLineChoice,trackArr
+                stringToPrint=getStringToRead(chartLineData,userLineChoice)
+                stringToRead=getPhonetic(stringToPrint)
+                print ""
+                print "Now reading technique {0}: {1}".format(userLineChoice,stringToPrint)
+                sleep(pauseTime) #Give a little time for tori to get ready after pressing the key
+                if 'darwin' in sys.platform.lower():
+                    #try using 'say'
+                    os.system('say -r '+str(voiceRate)+' -v'+str(voice)+' '+stringToRead.lower())
+                elif 'linux' in sys.platform.lower():
+                    #try using pyttsx
+                    en=pyttsx.init()
+                    en.setProperty("rate",voiceRate)
+                    en.say(sayString)
+                    en.runAndWait(stringToRead.lower())
+                    del en 
+                else:
+                    print "Sorry, text-to-speech not supported on this operating system: "+sys.platform 
+                userSelectedLine=False
+        else:
+            displayCharts(aCharts)
+            chartUIndex=selectChart()
+            chartLineData,trackArr=getChartData(aCharts,chartUIndex)
+            userPickedChart=True
+            copyArr=list(trackArr) #get a copy in case I want to restore
+        
+if __name__=='__main__':
+    main()
