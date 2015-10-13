@@ -15,6 +15,9 @@ def multiple_replace(di,te):
 
 #dictionary of replacements to use with multiple_replace
 myWords={
+    "GYAKU":"GHEE YA COO",
+    "GERI":"GARY",
+    "KAKIWAKE":"KAKI WAKI",
     "KUBI":"COO BEE",
     "SODE":"SO DAY",
     "TSURIKOMI":"SUREY COMEY",
