@@ -136,7 +136,7 @@ def main():
             print "Select technique to read by number..."
             print "Or hit 'r' to read a random technique"
             print "Or hit 'c' to change to a new chart..."
-            print "Or hit 'q' to quit"
+            print "Or hit 'q' to quit."
             userRawInput=raw_input("Enter your selection: ")
             if userRawInput.lower()=='q':
                 sys.exit()
