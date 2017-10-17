@@ -5,7 +5,6 @@ from time import sleep
 import pyttsx
 import types 
 
-#pauseTime=1 #time to wait after choice before sayign the technique
 pauseTime=1 #time to wait after choice before sayign the technique
 
 #rate=100 #pretty slow
