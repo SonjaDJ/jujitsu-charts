@@ -38,5 +38,3 @@ Anything starting with a "[" is treated as a comment and not displayed
 There are some reference docs in the charts directory too.
 
 Also, if you are planning on adding a chart, run the processCSV.py script on it to make sure there is no sillyness going on with the chart and put it in a consistant format, like: python processCSV.py badchart.csv >goodchart.csv
-
-Also...
